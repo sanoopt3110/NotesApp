@@ -13,3 +13,12 @@ span {
   overflow: hidden !important;
   text-overflow: ellipsis;
 }
+
+.ReactModal__Overlay.ReactModal__Overlay--after-open {
+  z-index: 10;
+}
+
+.ReactModal__Content.ReactModal__Content--after-open {
+  padding-top: 48px !important;
+  padding-bottom: 0px !important;
+}

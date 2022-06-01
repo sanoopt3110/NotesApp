@@ -16,7 +16,7 @@ const AddEdit = (props) => {
   // form validation rules
   const validationSchema = Yup.object().shape({
     title: Yup.string().required("Title is required"),
-    body: Yup.string().required("Body is required")
+    body: Yup.string().required("Body is required"),
   });
   const formOptions = { resolver: yupResolver(validationSchema) };
 
@@ -47,6 +47,7 @@ const AddEdit = (props) => {
       .then(() => {
         toast.success("Notes added successfully");
         router.push(".");
+        props?.setIsOpen && props.setIsOpen(false);
       })
       .catch(() => toast.error("Unexpected error occurred"));
   }
@@ -56,6 +57,7 @@ const AddEdit = (props) => {
       .then(() => {
         toast.success("Notes updated successfully");
         router.push("..");
+        props?.setIsOpen && props.setIsOpen(false);
       })
       .catch(() => toast.error("Unexpected error occurred"));
   }
@@ -69,7 +71,9 @@ const AddEdit = (props) => {
             name="title"
             type="text"
             {...register("title")}
-            className={`form-control mb-3 mt-2 ${errors.title ? "is-invalid" : ""}`}
+            className={`form-control mb-3 mt-2 ${
+              errors.title ? "is-invalid" : ""
+            }`}
           />
           <div className="invalid-feedback">{errors.title?.message}</div>
         </div>
@@ -81,15 +85,23 @@ const AddEdit = (props) => {
             name="body"
             type="text"
             {...register("body")}
-            className={`form-control mb-3 mt-2 ${errors.body ? "is-invalid" : ""}`}
+            className={`form-control mb-3 mt-2 ${
+              errors.body ? "is-invalid" : ""
+            }`}
             rows="10"
           />
           <div className="invalid-feedback">{errors.body?.message}</div>
         </div>
       </div>
       <div className="form-group d-flex flex-row-reverse">
-        <button type="submit" disabled={formState.isSubmitting} className="btn btn-primary float-end">
-          {formState.isSubmitting && <span className="spinner-border spinner-border-sm mr-1"></span>}
+        <button
+          type="submit"
+          disabled={formState.isSubmitting}
+          className="btn btn-primary float-end"
+        >
+          {formState.isSubmitting && (
+            <span className="spinner-border spinner-border-sm mr-1"></span>
+          )}
           {isAddMode ? "Save" : "Update"}
         </button>
       </div>
