@@ -12,7 +12,7 @@ const Login = () => {
   // form validation rules
   const validationSchema = Yup.object().shape({
     username: Yup.string().required("Username is required"),
-    password: Yup.string().required("Password is required")
+    password: Yup.string().required("Password is required"),
   });
   const formOptions = { resolver: yupResolver(validationSchema) };
 
@@ -24,7 +24,7 @@ const Login = () => {
     return dispatch(loginUser(data))
       .then((res) => {
         // get return url from query parameters or default to '/'
-        const returnUrl = router.query.returnUrl || "/";
+        const returnUrl = "/";
         router.push(returnUrl);
       })
       .catch((e) => console.error(e));
@@ -42,7 +42,9 @@ const Login = () => {
                 name="username"
                 type="text"
                 {...register("username")}
-                className={`form-control ${errors.username ? "is-invalid" : ""}`}
+                className={`form-control ${
+                  errors.username ? "is-invalid" : ""
+                }`}
               />
               <div className="invalid-feedback">{errors.username?.message}</div>
             </div>
@@ -52,13 +54,20 @@ const Login = () => {
                 name="password"
                 type="password"
                 {...register("password")}
-                className={`form-control ${errors.password ? "is-invalid" : ""}`}
+                className={`form-control ${
+                  errors.password ? "is-invalid" : ""
+                }`}
               />
               <div className="invalid-feedback">{errors.password?.message}</div>
             </div>
             <div className="form-group d-flex flex-row-reverse">
-              <button disabled={formState.isSubmitting} className="btn btn-primary">
-                {formState.isSubmitting && <span className="spinner-border spinner-border-sm mr-1"></span>}
+              <button
+                disabled={formState.isSubmitting}
+                className="btn btn-primary"
+              >
+                {formState.isSubmitting && (
+                  <span className="spinner-border spinner-border-sm mr-1"></span>
+                )}
                 Login
               </button>
             </div>

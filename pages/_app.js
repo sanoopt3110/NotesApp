@@ -45,7 +45,6 @@ const App = ({ Component, pageProps }) => {
       setAuthorized(false);
       router.push({
         pathname: "/account/login",
-        query: { returnUrl: router.asPath },
       });
     } else {
       setAuthorized(true);
