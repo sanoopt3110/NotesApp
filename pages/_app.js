@@ -8,15 +8,13 @@ import "styles/globals.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-toastify/dist/ReactToastify.css";
 
-import { useSelector } from "react-redux";
-import { userValueSelector } from "store/slice";
+import { userService } from "services";
 import { Nav } from "components/utils";
 
 const App = ({ Component, pageProps }) => {
   const router = useRouter();
   const [user, setUser] = useState(null);
   const [authorized, setAuthorized] = useState(false);
-  const userValue = useSelector(userValueSelector);
 
   useEffect(() => {
     // on initial load - run auth check
@@ -40,10 +38,10 @@ const App = ({ Component, pageProps }) => {
 
   function authCheck(url) {
     // redirect to login page if accessing a private page and not logged in
-    setUser(userValue);
+    setUser(userService.userValue);
     const publicPaths = ["/account/login"];
     const path = url.split("?")[0];
-    if (!userValue && !publicPaths.includes(path)) {
+    if (!userService.userValue && !publicPaths.includes(path)) {
       setAuthorized(false);
       router.push({
         pathname: "/account/login",
