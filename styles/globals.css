@@ -1,0 +1,15 @@
+a {
+  cursor: pointer;
+}
+
+.app-container {
+  min-height: 350px;
+}
+
+span {
+  display: inline-block;
+  width: 180px;
+  white-space: nowrap;
+  overflow: hidden !important;
+  text-overflow: ellipsis;
+}
